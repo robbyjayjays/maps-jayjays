@@ -1,55 +1,32 @@
+.locations-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    gap: 20px; /* Space between cards */
+    justify-items: center; /* Center items horizontally */
+    max-width: 1200px; /* Limit max width of the grid */
+    margin: 0 auto; /* Center the grid in the container */
+    padding: 20px; /* Add padding around the grid */
+}
+
 .card {
-    background-color: #b5e2ff; /* Card background color */
-    border: 2px solid black; /* Add border with black color */
-    border-radius: 12px; /* Rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    overflow: hidden; /* Ensure rounded corners are applied */
-    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition */
-    /* Removed fixed width and height for responsiveness */
-    flex: 1 1 calc(33.333% - 20px); /* Responsive width for 3 cards per row */
-    margin-bottom: 20px; /* Space below each card */
-    max-width: 300px; /* Max width for larger screens */
+    background-color: #b5e2ff;
+    border: 2px solid black;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100%; /* Full width in its grid cell */
+    max-width: 300px; /* Maximum width for each card */
 }
 
-.card:hover {
-    transform: translateY(-4px); /* Lift the card on hover */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
-}
-
-.card-header {
-    padding: 16px; /* Padding for header */
-    border-bottom: 1px solid #e0e0e0; /* Bottom border for separation */
-}
-
-.card-body {
-    padding: 16px; /* Padding for body */
-}
-
-.card-footer {
-    padding: 16px; /* Padding for footer */
-    display: flex; /* Flex for footer alignment */
-    justify-content: space-between; /* Space between items */
-    align-items: center; /* Center align items */
-}
-
-.location-icon {
-    color: #ff7f50; /* Orange color for the icon */
-    font-size: 1.25rem; /* Icon size */
-}
-
-.location-text {
-    margin-left: 8px; /* Space between icon and text */
-}
-
-/* Responsive adjustments */
 @media (max-width: 768px) {
-    .card {
-        flex: 1 1 calc(50% - 20px); /* 2 cards per row on medium screens */
+    .locations-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
     }
 }
 
 @media (max-width: 480px) {
-    .card {
-        flex: 1 1 100%; /* 1 card per row on small screens */
+    .locations-container {
+        grid-template-columns: 1fr; /* 1 column on small screens */
     }
 }

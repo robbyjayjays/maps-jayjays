@@ -24,7 +24,7 @@ const Locations = () => {
     return (
         <div className="locations-container">
             {gyms.map(gym => (
-                <div key={gym.id} className="card"> {/* Apply the card class */}
+                <div key={gym.id} className="card">
                     <div className="card-header">
                         <h3 className="text-xl font-bold">{gym.name}</h3>
                     </div>
@@ -36,10 +36,10 @@ const Locations = () => {
                         <div className="border border-gray-100 mb-5"></div>
                     </div>
 
-                    <div className="card-footer"> {/* Add a footer for better structure */}
+                    <div className="card-footer">
                         <div className="location-icon flex items-center">
                             <FaMapMarker className='inline mb-1 mr-1' />
-                            <span className="location-text">{`${gym.latitude} - ${gym.longitude}`}</span> {/* Adjust as necessary */}
+                            <span className="location-text">{`${gym.latitude} - ${gym.longitude}`}</span>
                         </div>
                     </div>
                 </div>
