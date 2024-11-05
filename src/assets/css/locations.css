@@ -5,8 +5,10 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     overflow: hidden; /* Ensure rounded corners are applied */
     transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition */
-    width: 300px;
-    height: 350px;
+    /* Removed fixed width and height for responsiveness */
+    flex: 1 1 calc(33.333% - 20px); /* Responsive width for 3 cards per row */
+    margin-bottom: 20px; /* Space below each card */
+    max-width: 300px; /* Max width for larger screens */
 }
 
 .card:hover {
@@ -37,4 +39,17 @@
 
 .location-text {
     margin-left: 8px; /* Space between icon and text */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card {
+        flex: 1 1 calc(50% - 20px); /* 2 cards per row on medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        flex: 1 1 100%; /* 1 card per row on small screens */
+    }
 }
