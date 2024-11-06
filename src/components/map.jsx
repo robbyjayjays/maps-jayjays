@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+
+// Fix the marker icon path issue
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+});
 
 const Map = ({ setGyms }) => {
   const [markerPosition, setMarkerPosition] = useState(null);
