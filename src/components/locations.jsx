@@ -37,8 +37,9 @@ const Locations = () => {
             <div className="card-footer">
               <div className="location-icon flex items-center">
                 <FaMapMarker className="inline mb-1 mr-1" />
-                <span className="location-text">{`${gym.latitude} - ${gym.longitude}`}</span>
+                <span className="location-text">{`${gym.location_name}`}</span>
               </div>
+              <span className="location-text">{`${gym.latitude} - ${gym.longitude}`}</span>
             </div>
           </div>
         ))}
