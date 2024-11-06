@@ -10,7 +10,7 @@ const Locations = () => {
   useEffect(() => {
     const fetchAllGyms = async () => {
       try {
-        const response = await fetch('/api/gyms'); // You would need to adjust your API to handle fetching all gyms without coordinates
+        const response = await fetch('/api/gyms'); // Adjust your API to handle fetching all gyms without coordinates
         const data = await response.json();
         setGyms(data); // Set initial gyms data
       } catch (error) {
@@ -23,7 +23,8 @@ const Locations = () => {
 
   return (
     <div className="locations-page">
-      <Map setGyms={setGyms} />
+      {/* Pass the gyms data to the Map component */}
+      <Map setGyms={setGyms} gyms={gyms} />
       <div className="locations-container">
         {gyms.map((gym) => (
           <div key={gym.id} className="card">

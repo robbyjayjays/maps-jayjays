@@ -22,7 +22,7 @@ const customDivIcon = new L.DivIcon({
   popupAnchor: [0, -30], // Above the icon
 });
 
-const Map = ({ setGyms }) => {
+const Map = ({ setGyms, gyms }) => {
   const [markerPosition, setMarkerPosition] = useState(null);
 
   function MapClickHandler() {
@@ -53,6 +53,8 @@ const Map = ({ setGyms }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
       <MapClickHandler />
+
+      {/* Render a marker at the clicked position */}
       {markerPosition && (
         <Marker position={markerPosition} icon={customDivIcon}>
           <Popup>
@@ -60,6 +62,17 @@ const Map = ({ setGyms }) => {
           </Popup>
         </Marker>
       )}
+
+      {/* Render markers for each of the 3 closest gyms */}
+      {gyms.map((gym, index) => (
+        <Marker key={index} position={[gym.latitude, gym.longitude]} icon={customDivIcon}>
+          <Popup>
+            {gym.name}<br />
+            Location: {gym.location_name}<br />
+            Coordinates: {gym.latitude.toFixed(4)}, {gym.longitude.toFixed(4)}
+          </Popup>
+        </Marker>
+      ))}
     </MapContainer>
   );
 };
