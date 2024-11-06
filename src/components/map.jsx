@@ -3,15 +3,23 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaf
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-// Fix the marker icon path issue
-import markerIcon from 'leaflet/dist/images/marker-icon.png';
-import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-
-delete L.Icon.Default.prototype._getIconUrl;
-
-L.Icon.Default.mergeOptions({
-  iconUrl: markerIcon,
-  shadowUrl: markerShadow,
+// Create a custom DivIcon
+const customDivIcon = new L.DivIcon({
+  html: `<div style="
+    background-color: blue;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+  ">GYM</div>`,
+  className: 'custom-div-icon',
+  iconSize: [30, 30],
+  iconAnchor: [15, 30], // Center bottom anchor
+  popupAnchor: [0, -30], // Above the icon
 });
 
 const Map = ({ setGyms }) => {
@@ -46,7 +54,7 @@ const Map = ({ setGyms }) => {
       />
       <MapClickHandler />
       {markerPosition && (
-        <Marker position={markerPosition}>
+        <Marker position={markerPosition} icon={customDivIcon}>
           <Popup>
             Marker at {markerPosition[0].toFixed(4)}, {markerPosition[1].toFixed(4)}
           </Popup>
