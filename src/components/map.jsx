@@ -24,7 +24,6 @@ const customDivIcon = new L.DivIcon({
 
 const Map = ({ setGyms }) => {
   const [markerPosition, setMarkerPosition] = useState(null);
-  const [gymMarkers, setGymMarkers] = useState([]); // State to hold gym markers
 
   function MapClickHandler() {
     useMapEvents({
@@ -39,7 +38,6 @@ const Map = ({ setGyms }) => {
           const response = await fetch(`/api/gyms?lat=${lat}&lng=${lng}`);
           const data = await response.json();
           setGyms(data); // Update the gyms state with the closest gyms
-          setGymMarkers(data); // Set gym markers for each of the closest gyms
         } catch (error) {
           console.error('Error fetching closest gyms:', error);
         }
@@ -55,8 +53,6 @@ const Map = ({ setGyms }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
       <MapClickHandler />
-      
-      {/* Render a marker at the clicked position */}
       {markerPosition && (
         <Marker position={markerPosition} icon={customDivIcon}>
           <Popup>
@@ -64,17 +60,6 @@ const Map = ({ setGyms }) => {
           </Popup>
         </Marker>
       )}
-
-      {/* Render markers for each of the 3 closest gyms */}
-      {gymMarkers.map((gym, index) => (
-        <Marker key={index} position={[gym.latitude, gym.longitude]} icon={customDivIcon}>
-          <Popup>
-            {gym.name}<br />
-            Location: {gym.location_name}<br />
-            Coordinates: {gym.latitude.toFixed(4)}, {gym.longitude.toFixed(4)}
-          </Popup>
-        </Marker>
-      ))}
     </MapContainer>
   );
 };
