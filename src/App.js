@@ -5,7 +5,6 @@ import Map from './components/map';
 function App() {
     return (
       <>
-        <Map />
         <Locations />
       </>
     );

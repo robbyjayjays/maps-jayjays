@@ -26,17 +26,18 @@ export default async function handler(req, res) {
 
       let result;
       if (lat && lng) {
-        // Fetch 3 closest gyms if coordinates are provided
+        // Use the Haversine formula to find the 3 closest gyms
         result = await pool.query(
           `SELECT *,
-           ST_DistanceSphere(
-             point(longitude, latitude),
-             point($1, $2)
-           ) AS distance
+           (6371 * acos(
+              cos(radians($1)) * cos(radians(latitude)) *
+              cos(radians(longitude) - radians($2)) +
+              sin(radians($1)) * sin(radians(latitude))
+           )) AS distance
            FROM gyms
            ORDER BY distance
            LIMIT 3`,
-          [lng, lat]
+          [lat, lng] // Pass latitude and longitude as parameters
         );
       } else {
         // Fetch all gyms if no coordinates are provided
