@@ -2,16 +2,26 @@ import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const Map = () => {
+const Map = ({ setGyms }) => {
   const [markerPosition, setMarkerPosition] = useState(null);
 
-  // Component to handle map clicks
   function MapClickHandler() {
     useMapEvents({
-      click(e) {
-        setMarkerPosition([e.latlng.lat, e.latlng.lng]); // Update marker position on click
-        console.log("Clicked at coordinates:", e.latlng.lat, e.latlng.lng); // Logs the coordinates
-      }
+      click: async (e) => {
+        const lat = e.latlng.lat;
+        const lng = e.latlng.lng;
+        setMarkerPosition([lat, lng]);
+        console.log("Clicked at coordinates:", lat, lng);
+
+        try {
+          // Fetch the 3 closest gyms from the API
+          const response = await fetch(`/api/gyms?lat=${lat}&lng=${lng}`);
+          const data = await response.json();
+          setGyms(data); // Update the gyms state with the closest gyms
+        } catch (error) {
+          console.error('Error fetching closest gyms:', error);
+        }
+      },
     });
     return null;
   }
@@ -22,8 +32,8 @@ const Map = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      <MapClickHandler /> {/* Add the click handler */}
-      {markerPosition && ( // Conditionally render marker if position is set
+      <MapClickHandler />
+      {markerPosition && (
         <Marker position={markerPosition}>
           <Popup>
             Marker at {markerPosition[0].toFixed(4)}, {markerPosition[1].toFixed(4)}
@@ -32,6 +42,6 @@ const Map = () => {
       )}
     </MapContainer>
   );
-}
+};
 
-export default Map
+export default Map;
