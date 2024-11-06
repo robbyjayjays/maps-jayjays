@@ -65,11 +65,16 @@ const Map = ({ setGyms, gyms }) => {
 
       {/* Render markers for each of the 3 closest gyms */}
       {gyms.map((gym, index) => (
-        <Marker key={index} position={[gym.latitude, gym.longitude]} icon={customDivIcon}>
+        (gym.latitude && gym.longitude) && // Ensure latitude and longitude exist
+        <Marker
+          key={index}
+          position={[Number(gym.latitude), Number(gym.longitude)]} // Convert to numbers
+          icon={customDivIcon}
+        >
           <Popup>
             {gym.name}<br />
             Location: {gym.location_name}<br />
-            Coordinates: {gym.latitude.toFixed(4)}, {gym.longitude.toFixed(4)}
+            Coordinates: {Number(gym.latitude).toFixed(4)}, {Number(gym.longitude).toFixed(4)}
           </Popup>
         </Marker>
       ))}
