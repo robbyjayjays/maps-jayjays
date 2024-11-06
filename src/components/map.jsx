@@ -34,7 +34,7 @@ const customClickedIcon = new L.DivIcon({
     align-items: center;
     color: white;
     font-weight: bold;
-  ">MY GYM</div>`,
+  ">YOU</div>`,
   className: 'custom-clicked-icon',
   iconSize: [30, 30],
   iconAnchor: [15, 30], // Center bottom anchor
