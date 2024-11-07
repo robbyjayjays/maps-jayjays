@@ -64,7 +64,7 @@
 .button-container {
     display: flex;
     justify-content: center; /* Center the button */
-    margin-bottom: 20px; /* Add space below the button */
+    margin-top: 20px; /* Add space below the button */
 }
 
 .reset-button {
