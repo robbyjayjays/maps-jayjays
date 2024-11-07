@@ -7,17 +7,17 @@ const Locations = () => {
   const [gyms, setGyms] = useState([]);
 
   // Fetch all gyms initially when the component mounts
-  useEffect(() => {
-    const fetchAllGyms = async () => {
-      try {
-        const response = await fetch('/api/gyms'); // Adjust your API to handle fetching all gyms without coordinates
-        const data = await response.json();
-        setGyms(data); // Set initial gyms data
-      } catch (error) {
-        console.error('Error fetching all gyms:', error);
-      }
-    };
+  const fetchAllGyms = async () => {
+    try {
+      const response = await fetch('/api/gyms'); // Adjust your API to handle fetching all gyms without coordinates
+      const data = await response.json();
+      setGyms(data); // Set initial gyms data
+    } catch (error) {
+      console.error('Error fetching all gyms:', error);
+    }
+  };
 
+  useEffect(() => {
     fetchAllGyms();
   }, []);
 
