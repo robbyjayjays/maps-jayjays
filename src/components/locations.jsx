@@ -39,9 +39,11 @@ const Locations = () => {
           markerPosition={markerPosition}
           setMarkerPosition={setMarkerPosition}
         />
+      <div className="button-container">
         <button onClick={resetGyms} className="reset-button">
           Show All Locations
         </button>
+      </div>
       </div>
       <div className="locations-container">
         {gyms.map((gym) => (
