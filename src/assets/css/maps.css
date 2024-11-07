@@ -1,0 +1,14 @@
+.map-with-card-container {
+    display: flex; /* Display container as a flex container */
+    align-items: flex-start; /* Align items to the top */
+    gap: 20px; /* Space between the map and the card */
+}
+  
+.forgot-gym-card {
+    width: 40%; /* Adjust the width as needed */
+    background-color: #f9f9f9; /* Light background color */
+    padding: 20px; /* Add padding */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+  

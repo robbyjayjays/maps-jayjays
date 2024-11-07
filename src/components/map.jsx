@@ -2,6 +2,7 @@ import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import '../assets/css/maps.css'
 
 // Create a custom DivIcon for gym markers
 const customGymIcon = new L.DivIcon({
@@ -64,41 +65,43 @@ const Map = ({ setGyms, gyms, showUserMarker, markerPosition, setMarkerPosition 
 
   return (
     <>
-      <MapContainer center={[50.8503, 4.3517]} zoom={7} style={{ height: '400px', width: '40%', margin: '0 auto', display: 'block' }}>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        />
-        <MapClickHandler />
+      <div className="map-with-card-container">
+        <MapContainer center={[50.8503, 4.3517]} zoom={7} style={{ height: '400px', width: '40%', margin: '0 auto', display: 'block' }}>
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+          <MapClickHandler />
 
-        {/* Render the 'YOU' marker only if showUserMarker is true */}
-        {showUserMarker && markerPosition && (
-          <Marker position={markerPosition} icon={customClickedIcon}>
-            <Popup>
-              Marker at {markerPosition[0].toFixed(4)}, {markerPosition[1].toFixed(4)}
-            </Popup>
-          </Marker>
-        )}
-
-        {/* Render markers for each gym */}
-        {gyms.map((gym, index) => (
-          (gym.latitude && gym.longitude) && (
-            <Marker
-              key={index}
-              position={[Number(gym.latitude), Number(gym.longitude)]}
-              icon={customGymIcon}
-            >
+          {/* Render the 'YOU' marker only if showUserMarker is true */}
+          {showUserMarker && markerPosition && (
+            <Marker position={markerPosition} icon={customClickedIcon}>
               <Popup>
-                {gym.name}<br />
-                Location: {gym.location_name}<br />
-                Coordinates: {Number(gym.latitude).toFixed(4)}, {Number(gym.longitude).toFixed(4)}
+                Marker at {markerPosition[0].toFixed(4)}, {markerPosition[1].toFixed(4)}
               </Popup>
             </Marker>
-          )
-        ))}
-      </MapContainer>
-      <div className='forgot-gym-card'>
-        forgot a gym this is the card for u!
+          )}
+
+          {/* Render markers for each gym */}
+          {gyms.map((gym, index) => (
+            (gym.latitude && gym.longitude) && (
+              <Marker
+                key={index}
+                position={[Number(gym.latitude), Number(gym.longitude)]}
+                icon={customGymIcon}
+              >
+                <Popup>
+                  {gym.name}<br />
+                  Location: {gym.location_name}<br />
+                  Coordinates: {Number(gym.latitude).toFixed(4)}, {Number(gym.longitude).toFixed(4)}
+                </Popup>
+              </Marker>
+            )
+          ))}
+        </MapContainer>
+        <div className='forgot-gym-card'>
+          forgot a gym this is the card for u!
+        </div>
       </div>
     </>
   );
