@@ -5,6 +5,7 @@ import Map from './map';
 
 const Locations = () => {
   const [gyms, setGyms] = useState([]);
+  const [showUserMarker, setShowUserMarker] = useState(true); // State to control 'YOU' marker visibility
 
   // Fetch all gyms initially when the component mounts
   const fetchAllGyms = async () => {
@@ -12,6 +13,7 @@ const Locations = () => {
       const response = await fetch('/api/gyms'); // Adjust your API to handle fetching all gyms without coordinates
       const data = await response.json();
       setGyms(data); // Set initial gyms data
+      setShowUserMarker(true); // Ensure the 'YOU' marker is shown on initial load
     } catch (error) {
       console.error('Error fetching all gyms:', error);
     }
@@ -24,11 +26,13 @@ const Locations = () => {
   // Function to reset the gyms data to show all locations
   const resetGyms = () => {
     fetchAllGyms();
+    setShowUserMarker(false); // Hide the 'YOU' marker when resetting
   };
+
   return (
     <div className="locations-page">
-      {/* Pass the gyms data to the Map component */}
-      <Map setGyms={setGyms} gyms={gyms} />
+      {/* Pass the gyms data and 'showUserMarker' prop to the Map component */}
+      <Map setGyms={setGyms} gyms={gyms} showUserMarker={showUserMarker} />
       <div className="locations-container">
         <button onClick={resetGyms} className="reset-button mb-5 p-2 bg-blue-500 text-white rounded">
           Show All Locations

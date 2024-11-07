@@ -18,14 +18,14 @@ const customGymIcon = new L.DivIcon({
   ">GYM</div>`,
   className: 'custom-gym-icon',
   iconSize: [30, 30],
-  iconAnchor: [15, 30], // Center bottom anchor
-  popupAnchor: [0, -30], // Above the icon
+  iconAnchor: [15, 30],
+  popupAnchor: [0, -30],
 });
 
 // Create a custom DivIcon for the clicked marker
 const customClickedIcon = new L.DivIcon({
   html: `<div style="
-    background-color: red; /* Change color for clicked marker */
+    background-color: red;
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -37,11 +37,11 @@ const customClickedIcon = new L.DivIcon({
   ">YOU</div>`,
   className: 'custom-clicked-icon',
   iconSize: [30, 30],
-  iconAnchor: [15, 30], // Center bottom anchor
-  popupAnchor: [0, -30], // Above the icon
+  iconAnchor: [15, 30],
+  popupAnchor: [0, -30],
 });
 
-const Map = ({ setGyms, gyms }) => {
+const Map = ({ setGyms, gyms, showUserMarker }) => {
   const [markerPosition, setMarkerPosition] = useState(null);
 
   function MapClickHandler() {
@@ -53,10 +53,9 @@ const Map = ({ setGyms, gyms }) => {
         console.log("Clicked at coordinates:", lat, lng);
 
         try {
-          // Fetch the 3 closest gyms from the API
           const response = await fetch(`/api/gyms?lat=${lat}&lng=${lng}`);
           const data = await response.json();
-          setGyms(data); // Update the gyms state with the closest gyms
+          setGyms(data);
         } catch (error) {
           console.error('Error fetching closest gyms:', error);
         }
@@ -73,8 +72,8 @@ const Map = ({ setGyms, gyms }) => {
       />
       <MapClickHandler />
 
-      {/* Render a marker at the clicked position with a different color */}
-      {markerPosition && (
+      {/* Render the 'YOU' marker if showUserMarker is true */}
+      {showUserMarker && markerPosition && (
         <Marker position={markerPosition} icon={customClickedIcon}>
           <Popup>
             Marker at {markerPosition[0].toFixed(4)}, {markerPosition[1].toFixed(4)}
@@ -82,20 +81,21 @@ const Map = ({ setGyms, gyms }) => {
         </Marker>
       )}
 
-      {/* Render markers for each of the 3 closest gyms */}
+      {/* Render markers for each gym */}
       {gyms.map((gym, index) => (
-        (gym.latitude && gym.longitude) && // Ensure latitude and longitude exist
-        <Marker
-          key={index}
-          position={[Number(gym.latitude), Number(gym.longitude)]} // Convert to numbers
-          icon={customGymIcon} // Use the gym icon for other markers
-        >
-          <Popup>
-            {gym.name}<br />
-            Location: {gym.location_name}<br />
-            Coordinates: {Number(gym.latitude).toFixed(4)}, {Number(gym.longitude).toFixed(4)}
-          </Popup>
-        </Marker>
+        (gym.latitude && gym.longitude) && (
+          <Marker
+            key={index}
+            position={[Number(gym.latitude), Number(gym.longitude)]}
+            icon={customGymIcon}
+          >
+            <Popup>
+              {gym.name}<br />
+              Location: {gym.location_name}<br />
+              Coordinates: {Number(gym.latitude).toFixed(4)}, {Number(gym.longitude).toFixed(4)}
+            </Popup>
+          </Marker>
+        )
       ))}
     </MapContainer>
   );
