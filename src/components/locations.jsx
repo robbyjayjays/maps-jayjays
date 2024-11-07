@@ -6,6 +6,7 @@ import Map from './map';
 const Locations = () => {
   const [gyms, setGyms] = useState([]);
   const [showUserMarker, setShowUserMarker] = useState(true); // State to control 'YOU' marker visibility
+  const [markerPosition, setMarkerPosition] = useState(null); // State for marker position
 
   // Fetch all gyms initially when the component mounts
   const fetchAllGyms = async () => {
@@ -27,12 +28,19 @@ const Locations = () => {
   const resetGyms = () => {
     fetchAllGyms();
     setShowUserMarker(false); // Hide the 'YOU' marker when resetting
+    setMarkerPosition(null); // Clear the marker position
   };
 
   return (
     <div className="locations-page">
-      {/* Pass the gyms data and 'showUserMarker' prop to the Map component */}
-      <Map setGyms={setGyms} gyms={gyms} showUserMarker={showUserMarker} />
+      {/* Pass the gyms data, markerPosition, setMarkerPosition, and 'showUserMarker' prop to the Map component */}
+      <Map 
+        setGyms={setGyms} 
+        gyms={gyms} 
+        showUserMarker={showUserMarker} 
+        markerPosition={markerPosition} 
+        setMarkerPosition={setMarkerPosition}
+      />
       <div className="locations-container">
         <button onClick={resetGyms} className="reset-button mb-5 p-2 bg-blue-500 text-white rounded">
           Show All Locations

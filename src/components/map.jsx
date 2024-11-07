@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -41,9 +41,7 @@ const customClickedIcon = new L.DivIcon({
   popupAnchor: [0, -30],
 });
 
-const Map = ({ setGyms, gyms, showUserMarker }) => {
-  const [markerPosition, setMarkerPosition] = useState(null);
-
+const Map = ({ setGyms, gyms, showUserMarker, markerPosition, setMarkerPosition }) => {
   function MapClickHandler() {
     useMapEvents({
       click: async (e) => {
@@ -72,7 +70,7 @@ const Map = ({ setGyms, gyms, showUserMarker }) => {
       />
       <MapClickHandler />
 
-      {/* Render the 'YOU' marker if showUserMarker is true */}
+      {/* Render the 'YOU' marker only if showUserMarker is true */}
       {showUserMarker && markerPosition && (
         <Marker position={markerPosition} icon={customClickedIcon}>
           <Popup>
