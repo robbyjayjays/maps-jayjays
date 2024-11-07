@@ -21,11 +21,18 @@ const Locations = () => {
     fetchAllGyms();
   }, []);
 
+  // Function to reset the gyms data to show all locations
+  const resetGyms = () => {
+    fetchAllGyms();
+  };
   return (
     <div className="locations-page">
       {/* Pass the gyms data to the Map component */}
       <Map setGyms={setGyms} gyms={gyms} />
       <div className="locations-container">
+        <button onClick={resetGyms} className="reset-button mb-5 p-2 bg-blue-500 text-white rounded">
+          Show All Locations
+        </button>
         {gyms.map((gym) => (
           <div key={gym.id} className="card">
             <div className="card-header">
