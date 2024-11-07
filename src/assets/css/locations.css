@@ -1,3 +1,4 @@
+/* Existing CSS for .locations-container and cards - Keep this */
 .locations-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Three columns */
@@ -25,17 +26,11 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* Slightly darker shadow on hover */
 }
 
-.card-header {
-    padding: 10px 16px; /* Padding for header */
-    border-bottom: 1px solid #b0d0ff; /* Softer bottom border */
-}
-
-.card-body {
-    padding: 10px 16px; /* Padding for body */
+.card-header, .card-body, .card-footer {
+    padding: 10px 16px; /* Consistent padding */
 }
 
 .card-footer {
-    padding: 10px 16px; /* Padding for footer */
     display: flex; /* Flex for footer alignment */
     justify-content: space-between; /* Space between items */
     align-items: center; /* Center align items */
@@ -65,20 +60,23 @@
     }
 }
 
+/* Modify the .reset-button styling */
+.button-container {
+    display: flex;
+    justify-content: center; /* Center the button */
+    margin-bottom: 20px; /* Add space below the button */
+}
+
 .reset-button {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 8px 16px;
-    background-color: #007BFF; /* Match card border color */
+    padding: 10px 20px;
+    background-color: #007BFF; /* Button color */
     color: #ffffff;
     border: 1px solid #0056b3; /* Add a border for consistency */
     border-radius: 6px; /* Rounded corners */
     cursor: pointer;
     font-size: 14px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* Slightly more pronounced shadow */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform transition */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* Slight shadow */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Add hover effect */
 }
 
 .reset-button:hover {
