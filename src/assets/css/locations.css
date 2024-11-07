@@ -9,10 +9,10 @@
 }
 
 .card {
-    background-color: #b5e2ff; /* Card background color */
-    border: 2px solid black; /* Add border with black color */
+    background-color: #e0f7ff; /* Softer card background color */
+    border: 1px solid #007BFF; /* Subtle border to match button */
     border-radius: 12px; /* Rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     overflow: hidden; /* Ensure rounded corners are applied */
     transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition */
     width: 100%; /* Full width in its grid cell */
@@ -21,13 +21,13 @@
 }
 
 .card:hover {
-    transform: translateY(-4px); /* Lift the card on hover */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+    transform: translateY(-6px); /* Lift the card higher on hover */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* Slightly darker shadow on hover */
 }
 
 .card-header {
     padding: 10px 16px; /* Padding for header */
-    border-bottom: 1px solid #e0e0e0; /* Bottom border for separation */
+    border-bottom: 1px solid #b0d0ff; /* Softer bottom border */
 }
 
 .card-body {
@@ -43,12 +43,13 @@
 }
 
 .location-icon {
-    color: orange; /* Orange color for the icon */
+    color: #f5a623; /* Richer orange color for the icon */
     font-size: 1.25rem; /* Icon size */
 }
 
 .location-text {
     margin-left: 8px; /* Space between icon and text */
+    font-weight: 500; /* Slightly bolder text */
 }
 
 /* Responsive adjustments */
@@ -63,23 +64,24 @@
         grid-template-columns: 1fr; /* 1 column on small screens */
     }
 }
+
 .reset-button {
     position: absolute;
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     padding: 8px 16px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 4px;
+    background-color: #007BFF; /* Match card border color */
+    color: #ffffff;
+    border: 1px solid #0056b3; /* Add a border for consistency */
+    border-radius: 6px; /* Rounded corners */
     cursor: pointer;
     font-size: 14px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
-  }
-  
-  .reset-button:hover {
-    background-color: #0056b3;
-  }
-  
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* Slightly more pronounced shadow */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform transition */
+}
+
+.reset-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+}
