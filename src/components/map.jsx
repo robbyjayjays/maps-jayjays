@@ -65,7 +65,6 @@ const Map = ({ setGyms, gyms, showUserMarker, markerPosition, setMarkerPosition 
 
   return (
     <>
-      <div className="map-with-card-container">
         <MapContainer center={[50.8503, 4.3517]} zoom={7} style={{ height: '400px', width: '40%', margin: '0 auto', display: 'block' }}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -99,10 +98,6 @@ const Map = ({ setGyms, gyms, showUserMarker, markerPosition, setMarkerPosition 
             )
           ))}
         </MapContainer>
-        <div className='forgot-gym-card'>
-          forgot a gym this is the card for u!
-        </div>
-      </div>
     </>
   );
 };

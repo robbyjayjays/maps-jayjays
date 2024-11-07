@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaMapMarker } from 'react-icons/fa';
 import '../assets/css/locations.css';
 import Map from './map';
+import { Link } from 'react-router-dom';
 
 const Locations = () => {
   const [gyms, setGyms] = useState([]);
@@ -43,6 +44,9 @@ const Locations = () => {
         <button onClick={resetGyms} className="reset-button">
           Show All Locations
         </button>
+        <Link to="/gym" className="reset-button">
+          Don't see your gym? Add it here!
+        </Link>
       </div>
       </div>
       <div className="locations-container">

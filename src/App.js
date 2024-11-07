@@ -1,12 +1,16 @@
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Locations from './components/locations';
-import Map from './components/map';
+import Gym from './components/Gym'; // Import the Gym component
 
 function App() {
     return (
-      <>
-        <Locations />
-      </>
+        <Router>
+            <Routes>
+                <Route path="/" element={<Locations />} />
+                <Route path="/gym" element={<Gym />} /> {/* Route for the Gym component */}
+            </Routes>
+        </Router>
     );
 }
 
