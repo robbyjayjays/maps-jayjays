@@ -5,16 +5,15 @@ import Map from './map';
 
 const Locations = () => {
   const [gyms, setGyms] = useState([]);
-  const [showUserMarker, setShowUserMarker] = useState(true); // State to control 'YOU' marker visibility
-  const [markerPosition, setMarkerPosition] = useState(null); // State for marker position
+  const [showUserMarker, setShowUserMarker] = useState(true);
+  const [markerPosition, setMarkerPosition] = useState(null);
 
-  // Fetch all gyms initially when the component mounts
   const fetchAllGyms = async () => {
     try {
-      const response = await fetch('/api/gyms'); // Adjust your API to handle fetching all gyms without coordinates
+      const response = await fetch('/api/gyms');
       const data = await response.json();
-      setGyms(data); // Set initial gyms data
-      setShowUserMarker(true); // Ensure the 'YOU' marker is shown on initial load
+      setGyms(data);
+      setShowUserMarker(true);
     } catch (error) {
       console.error('Error fetching all gyms:', error);
     }
@@ -24,27 +23,27 @@ const Locations = () => {
     fetchAllGyms();
   }, []);
 
-  // Function to reset the gyms data to show all locations
   const resetGyms = () => {
     fetchAllGyms();
-    setShowUserMarker(false); // Hide the 'YOU' marker when resetting
-    setMarkerPosition(null); // Clear the marker position
+    setShowUserMarker(false);
+    setMarkerPosition(null);
   };
 
   return (
     <div className="locations-page">
-      {/* Pass the gyms data, markerPosition, setMarkerPosition, and 'showUserMarker' prop to the Map component */}
-      <Map 
-        setGyms={setGyms} 
-        gyms={gyms} 
-        showUserMarker={showUserMarker} 
-        markerPosition={markerPosition} 
-        setMarkerPosition={setMarkerPosition}
-      />
-      <div className="locations-container">
+      <div className="map-container">
+        <Map
+          setGyms={setGyms}
+          gyms={gyms}
+          showUserMarker={showUserMarker}
+          markerPosition={markerPosition}
+          setMarkerPosition={setMarkerPosition}
+        />
         <button onClick={resetGyms} className="reset-button">
           Show All Locations
         </button>
+      </div>
+      <div className="locations-container">
         {gyms.map((gym) => (
           <div key={gym.id} className="card">
             <div className="card-header">
